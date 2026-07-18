@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /assets/templates/
+
+Sitemap: https://rmkaavfoods.com/sitemap.xml
