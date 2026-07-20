@@ -3039,3 +3039,27 @@ main p a:not(.btn):not(.btn--text):not(.product-card__cta):hover {
   outline-offset: 3px;
   border-radius: 2px;
 }
+
+/* ============================================================
+   FORM STATUS MESSAGES
+   Inline feedback after a contact / newsletter submission.
+   ============================================================ */
+.form-status {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.form-status--success {
+  background-color: #E8F0DC;
+  color: #3D4A22;
+  border: 1px solid #708840;
+}
+
+.form-status--error {
+  background-color: #F7E3DC;
+  color: #7A2E12;
+  border: 1px solid #C26218;
+}

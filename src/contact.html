@@ -141,7 +141,8 @@
             </div>
 
             <!-- Contact form -->
-            <form class="contact-form" action="https://formspree.io/f/PLACEHOLDER" method="POST" novalidate>
+            <!-- Endpoint is configured in assets/js/main.js -> FORMS.contactUrl -->
+            <form class="contact-form" id="contact-form" method="POST" novalidate>
               <h2>Send us a message</h2>
               <p>Fill in the form and we'll respond within 1 working day.</p>
 
@@ -180,6 +181,8 @@
               <div class="form-submit-row">
                 <button type="submit" class="btn btn--primary">Send message</button>
               </div>
+
+              <p class="form-status" id="contact-status" role="status" aria-live="polite" hidden></p>
 
               <p style="font-size: 0.75rem; color: var(--color-brown-light); margin-top: 1.5rem;">
                 By sending this message, you agree to our <a href="/policies/privacy.html">Privacy Policy</a>. We don't share your details with anyone.

@@ -727,7 +727,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
               </span>
               <span class="credentials-band__label">Secure payments</span>
-              <span class="credentials-band__value">UPI &middot; Cards &middot; Netbanking &middot; Razorpay-secured</span>
+              <span class="credentials-band__value" data-payment-note>UPI &middot; Bank transfer &middot; Confirmed over WhatsApp</span>
             </li>
           </ul>
         </div>
@@ -760,12 +760,13 @@
           <h2>Recipes, traditions, and a little discount in your inbox.</h2>
           <p class="newsletter__sub">Once a month. No spam. Unsubscribe whenever.</p>
 
-          <!-- TODO: replace action="#" with real Brevo / Mailchimp form action URL -->
-          <form class="newsletter__form" action="#" method="POST" novalidate>
+          <!-- Endpoint is configured in assets/js/main.js -> FORMS.newsletterUrl -->
+          <form class="newsletter__form" id="newsletter-form" method="POST" novalidate>
             <label for="newsletter-email" class="sr-only">Email address</label>
             <input type="email" id="newsletter-email" name="EMAIL" required placeholder="your@email.com" class="newsletter__input">
             <button type="submit" class="btn btn--outline-cream">Subscribe</button>
           </form>
+          <p class="form-status" id="newsletter-status" role="status" aria-live="polite" hidden></p>
 
           <p class="newsletter__terms">
             By subscribing, you agree to our <a href="/policies/privacy.html">Privacy Policy</a>.
