@@ -29,3 +29,8 @@ scripts/
 Thumbs.db
 .git/
 .gitignore
+
+# Test tooling — never deploy
+node_modules/
+package.json
+package-lock.json

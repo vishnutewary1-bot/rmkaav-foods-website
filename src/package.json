@@ -1,0 +1,13 @@
+{
+  "name": "rmkaav-foods-site",
+  "private": true,
+  "description": "Static site for RMKAAV Foods. No build step — assets/ is served as-is.",
+  "scripts": {
+    "check": "python3 scripts/check_site.py",
+    "test": "node scripts/test_functionality.js && node scripts/test_razorpay_upgrade.js",
+    "verify": "npm run check && npm run test"
+  },
+  "devDependencies": {
+    "jsdom": "^24.0.0"
+  }
+}
