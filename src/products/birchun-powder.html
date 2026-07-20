@@ -88,9 +88,31 @@
 
           <div class="product-hero__gallery">
             <div class="product-hero__main-image">
-              <!-- TODO: replace with real Birchun Powder packaging shot -->
-              <img src="/assets/images/products/birchun-1.webp" alt="Birchun Powder — Indian jujube fruit powder by Banda Delights" loading="eager" width="600" height="600">
+              <img id="product-main-image" src="/assets/images/products/birchun-1.webp" alt="Birchun Powder — Indian jujube fruit powder by Banda Delights" loading="eager" width="600" height="600">
             </div>
+            <ul class="product-gallery__thumbs" aria-label="Birchun Powder photos">
+              <li>
+                <button type="button" class="product-gallery__thumb is-active"
+                        data-full="/assets/images/products/birchun-1.webp"
+                        aria-label="Show Birchun Powder photo 1 of 3">
+                  <img src="/assets/images/products/birchun-1.webp" alt="" width="80" height="80" loading="lazy">
+                </button>
+              </li>
+              <li>
+                <button type="button" class="product-gallery__thumb"
+                        data-full="/assets/images/products/birchun-2.webp"
+                        aria-label="Show Birchun Powder photo 2 of 3">
+                  <img src="/assets/images/products/birchun-2.webp" alt="" width="80" height="80" loading="lazy">
+                </button>
+              </li>
+              <li>
+                <button type="button" class="product-gallery__thumb"
+                        data-full="/assets/images/products/birchun-3.webp"
+                        aria-label="Show Birchun Powder photo 3 of 3">
+                  <img src="/assets/images/products/birchun-3.webp" alt="" width="80" height="80" loading="lazy">
+                </button>
+              </li>
+            </ul>
           </div>
 
           <div class="product-info">
@@ -128,7 +150,7 @@
           <div class="story-block">
             <div class="story-block__image">
               <!-- TODO: raw jujube fruits on a branch, sunlit, with a glass of birchun-water in the foreground -->
-              <img src="/assets/images/lifestyle/jujube-tree.jpg" alt="Raw jujube fruits on a branch in Banda" loading="lazy" width="600" height="450">
+              <img src="/assets/images/lifestyle/jujube-tree.webp" alt="Raw jujube fruits on a branch in Banda" loading="lazy" width="600" height="450">
             </div>
             <div class="story-block__content">
               <h2>The story of Birchun</h2>
@@ -239,7 +261,7 @@
             </div>
             <div class="story-block__image">
               <!-- TODO: orchard photo or hands holding fresh jujube -->
-              <img src="/assets/images/lifestyle/jujube-fruits-stages.jpg" alt="Family orchard in Banda district" loading="lazy" width="600" height="450">
+              <img src="/assets/images/lifestyle/jujube-fruits-stages.webp" alt="Family orchard in Banda district" loading="lazy" width="600" height="450">
             </div>
           </div>
         </div>

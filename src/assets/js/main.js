@@ -226,6 +226,22 @@
     });
   }
 
+  // ----- Product photo gallery -----
+  // Thumbnails swap the main product image. Buttons, so keyboard works
+  // for free. With JS off the main image still renders and every
+  // thumbnail is still a visible photo of the product.
+  const mainImage = document.getElementById('product-main-image');
+  const thumbs = document.querySelectorAll('.product-gallery__thumb');
+  if (mainImage && thumbs.length) {
+    thumbs.forEach(function (thumb) {
+      thumb.addEventListener('click', function () {
+        mainImage.src = thumb.getAttribute('data-full');
+        thumbs.forEach(function (t) { t.classList.remove('is-active'); });
+        thumb.classList.add('is-active');
+      });
+    });
+  }
+
   // ----- Sticky header shadow on scroll -----
   const header = document.getElementById('site-header');
   if (header) {
