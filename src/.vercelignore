@@ -1,0 +1,31 @@
+# Internal planning docs — live in the repo but never deploy to the public site.
+*.md
+
+# Python tooling for one-off image conversion — not for production.
+scripts/
+
+# Build artifacts
+*.zip
+
+# Orphan root-level JPGs (pre-WebP originals, not referenced by any HTML)
+/birchun-2.jpg
+/birchun-3.jpg
+/kaitha-buknu-1.jpg
+/kaitha-buknu-2.jpg
+/kaitha-buknu-3.jpg
+/kaitha-guda-1.jpg
+/kaitha-guda-2.jpg
+/kaitha-guda-3.jpg
+/kaitha-powder-1.jpg
+/kaitha-powder-2.jpg
+/kaitha-powder-3.jpg
+
+# Editor / system noise
+.claude/
+.vscode/
+.idea/
+.vercel/
+.DS_Store
+Thumbs.db
+.git/
+.gitignore
