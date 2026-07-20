@@ -202,6 +202,30 @@
     });
   }
 
+  // ----- Products dropdown -----
+  // Click/Enter toggles the menu and reports state via aria-expanded.
+  // Hover and focus-within still open it via CSS, so this is additive.
+  const dropdownToggle = document.querySelector('.site-nav__dropdown-toggle');
+  if (dropdownToggle) {
+    dropdownToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      const isOpen = dropdownToggle.getAttribute('aria-expanded') === 'true';
+      dropdownToggle.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!dropdownToggle.parentNode.contains(e.target)) {
+        dropdownToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        dropdownToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   // ----- Sticky header shadow on scroll -----
   const header = document.getElementById('site-header');
   if (header) {
@@ -224,9 +248,17 @@
 
   // ----- Mark current nav link as active -----
   // Compares the link's pathname to the current page and adds aria-current="page"
-  const currentPath = window.location.pathname;
+  // Treat "/" and "/index.html" as the same page, and skip in-page
+  // anchors like the Products dropdown trigger (href="#"), which would
+  // otherwise resolve to the current pathname and match every page.
+  function normalisePath(p) {
+    return p.replace(/\/index\.html$/, '/');
+  }
+  const currentPath = normalisePath(window.location.pathname);
   document.querySelectorAll('.site-nav__link, .site-nav__dropdown a').forEach(function (link) {
-    const linkPath = new URL(link.href, window.location.origin).pathname;
+    const raw = link.getAttribute('href');
+    if (!raw || raw.charAt(0) === '#') return;
+    const linkPath = normalisePath(new URL(link.href, window.location.origin).pathname);
     if (linkPath === currentPath) {
       link.setAttribute('aria-current', 'page');
     }
