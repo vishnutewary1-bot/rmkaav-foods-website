@@ -7,47 +7,17 @@
   'use strict';
 
   /* ============================================================
-     ORDER CONFIGURATION  —  the only block you need to edit
+     ORDER CONFIGURATION
      ============================================================
 
-     WHEN YOUR RAZORPAY ACCOUNT IS READY:
-     Create one Payment Page per product in the Razorpay dashboard,
-     then paste each URL into the matching `razorpayUrl` below.
-     That is the whole job — every "Buy Now" button on every page
-     picks it up automatically. Do not edit the HTML.
-
-     While a razorpayUrl is empty (''), that product's Buy Now button
-     falls back to a WhatsApp order with the item, size and price
-     already written into the message. The site stays sellable.
+     Product prices and Razorpay Payment Page URLs live in
+     assets/js/products-data.js now (loaded before this file on every
+     page) — that is the only block you need to edit. main.js just
+     reads it as window.RMKAAV_PRODUCTS / window.RMKAAV_WHATSAPP_NUMBER
+     so cart.js can share the exact same catalog.
      ============================================================ */
-  const PRODUCTS = {
-    'birchun': {
-      name: 'Birchun Powder',
-      weight: '50g',
-      price: 249,
-      razorpayUrl: ''    // <-- paste Razorpay Payment Page URL here
-    },
-    'kaitha-powder': {
-      name: 'Kaitha Powder',
-      weight: '50g',
-      price: 249,
-      razorpayUrl: ''    // <-- paste Razorpay Payment Page URL here
-    },
-    'kaitha-guda': {
-      name: 'Kaitha Guda',
-      weight: '250g',
-      price: 399,
-      razorpayUrl: ''    // <-- paste Razorpay Payment Page URL here
-    },
-    'kaitha-buknu': {
-      name: 'Kaitha Buknu Powder',
-      weight: '',        // TODO: net weight not yet confirmed by RMKAAV
-      price: 269,
-      razorpayUrl: ''    // <-- paste Razorpay Payment Page URL here
-    }
-  };
-
-  const WHATSAPP_NUMBER = '917068946333';
+  const PRODUCTS = window.RMKAAV_PRODUCTS || {};
+  const WHATSAPP_NUMBER = window.RMKAAV_WHATSAPP_NUMBER || '917068946333';
 
   /* ------------------------------------------------------------
      FORM ENDPOINTS — paste these in when the accounts exist.

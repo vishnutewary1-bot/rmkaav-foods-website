@@ -1,20 +1,26 @@
 const { JSDOM } = require('jsdom');
 const fs = require('fs');
 const SRC = require('path').resolve(__dirname, '..');
-let js = fs.readFileSync(SRC + '/assets/js/main.js', 'utf8');
+const productsDataJs = fs.readFileSync(SRC + '/assets/js/products-data.js', 'utf8');
+const mainJs = fs.readFileSync(SRC + '/assets/js/main.js', 'utf8');
 
-// Simulate the ONLY edit the user will make later: pasting 4 URLs.
-const patched = js.replace(
-  /'birchun': \{\s*name: 'Birchun Powder',\s*weight: '50g',\s*price: 249,\s*razorpayUrl: ''/,
-  `'birchun': { name: 'Birchun Powder', weight: '50g', price: 249, razorpayUrl: 'https://rzp.io/l/birchun-test'`
+// Simulate the ONLY edit the user will make later: pasting a Razorpay
+// Payment Page URL into products-data.js (the single shared config file).
+const patchedProductsData = productsDataJs.replace(
+  /'birchun': \{\s*name: 'Birchun Powder',\s*weight: '50g',\s*price: 249,\s*image: '[^']*',\s*url: '[^']*',\s*razorpayUrl: ''/,
+  `'birchun': { name: 'Birchun Powder', weight: '50g', price: 249, image: '/assets/images/products/birchun-1.webp', url: '/products/birchun-powder.html', razorpayUrl: 'https://rzp.io/l/birchun-test'`
 );
-if (patched === js) { console.log('FAIL: config block did not match — flip would not work'); process.exit(1); }
+if (patchedProductsData === productsDataJs) {
+  console.log('FAIL: config block did not match — flip would not work');
+  process.exit(1);
+}
 
 const dom = new JSDOM(fs.readFileSync(SRC + '/products/birchun-powder.html', 'utf8'),
   { url: 'https://rmkaavfoods.com/products/birchun-powder.html', runScripts: 'outside-only' });
 dom.window.matchMedia = () => ({ matches: false, addListener(){}, removeListener(){} });
 dom.window.IntersectionObserver = class { observe(){} unobserve(){} disconnect(){} };
-dom.window.eval(patched);
+dom.window.eval(patchedProductsData);
+dom.window.eval(mainJs);
 
 const d = dom.window.document;
 const buys = [...d.querySelectorAll('[data-order="birchun"]')];

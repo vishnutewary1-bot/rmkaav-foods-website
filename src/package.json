@@ -4,7 +4,7 @@
   "description": "Static site for RMKAAV Foods. No build step — assets/ is served as-is.",
   "scripts": {
     "check": "python3 scripts/check_site.py",
-    "test": "node scripts/test_functionality.js && node scripts/test_razorpay_upgrade.js",
+    "test": "node scripts/test_functionality.js && node scripts/test_razorpay_upgrade.js && node scripts/test_cart.js",
     "verify": "npm run check && npm run test"
   },
   "devDependencies": {
