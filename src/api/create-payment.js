@@ -1,7 +1,15 @@
 // Starts a checkout: recomputes the total server-side (never trusts a
 // client-submitted amount), records a 'pending' order, and asks
 // Instamojo for a hosted checkout URL to send the shopper to.
+//
+// Writes use the service-role client, not the shopper's own JWT —
+// orders' RLS deliberately grants shoppers no insert/update rights at
+// all (see scripts/sql/001_orders_table.sql), so a signed-in shopper
+// can never write a fake 'paid' row themselves via a direct API call.
+// requireUser() still verifies the shopper's identity; this function
+// enforces ownership itself (the row it writes is tied to auth.user.id).
 const { requireUser } = require('./_lib/supabaseServer');
+const { getAdminClient } = require('./_lib/supabaseAdmin');
 const { validateCart, validateDetails, computeTotals } = require('./_lib/pricing');
 const instamojo = require('./_lib/instamojo');
 
@@ -47,8 +55,9 @@ module.exports = async function handler(req, res) {
 
   const ref = buildOrderRef();
   const origin = siteOrigin(req);
+  const admin = getAdminClient();
 
-  const { data: order, error: insertError } = await auth.client
+  const { data: order, error: insertError } = await admin
     .from('orders')
     .insert({
       ref: ref,
@@ -92,13 +101,13 @@ module.exports = async function handler(req, res) {
       throw new Error('Could not resolve checkout URL from Instamojo response.');
     }
 
-    await auth.client
+    await admin
       .from('orders')
       .update({ instamojo_payment_request_id: paymentRequestId, updated_at: new Date().toISOString() })
       .eq('id', order.id);
   } catch (err) {
     console.error('create-payment: Instamojo request failed', err);
-    await auth.client
+    await admin
       .from('orders')
       .update({ status: 'failed', updated_at: new Date().toISOString() })
       .eq('id', order.id);

@@ -3,7 +3,14 @@
 // query param (client-supplied, editable) — always re-checks with
 // Instamojo directly, and returns the DB's order snapshot rather than
 // anything the client might have cached locally.
+//
+// Reads/writes use the service-role client, not the shopper's own
+// JWT — orders' RLS grants shoppers no write rights at all (see
+// scripts/sql/001_orders_table.sql), so this function enforces
+// ownership itself (the explicit .eq('user_id', ...) filter below)
+// rather than relying on RLS to scope it.
 const { requireUser } = require('./_lib/supabaseServer');
+const { getAdminClient } = require('./_lib/supabaseAdmin');
 const instamojo = require('./_lib/instamojo');
 
 function toOrderSnapshot(row) {
@@ -25,7 +32,8 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const { data: row, error: selectError } = await auth.client
+  const admin = getAdminClient();
+  const { data: row, error: selectError } = await admin
     .from('orders')
     .select('*')
     .eq('instamojo_payment_request_id', paymentRequestId)
@@ -57,7 +65,7 @@ module.exports = async function handler(req, res) {
   else if (payment.status === false) status = 'failed';
 
   if (status !== 'processing' && row.status !== status) {
-    await auth.client
+    await admin
       .from('orders')
       .update({ status: status, instamojo_payment_id: paymentId, updated_at: new Date().toISOString() })
       .eq('id', row.id);

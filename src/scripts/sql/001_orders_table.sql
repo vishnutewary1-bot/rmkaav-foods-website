@@ -30,23 +30,21 @@ create index if not exists orders_payment_request_id_idx on public.orders(instam
 
 alter table public.orders enable row level security;
 
--- A shopper can see only their own orders.
+-- A shopper can see only their own orders (used for a future order-
+-- history page — nothing reads this via RLS yet, but it's harmless
+-- and correct to have ready).
 create policy "orders_select_own" on public.orders
   for select using (auth.uid() = user_id);
 
--- The create-payment function inserts on behalf of the logged-in
--- shopper (forwarding their JWT), so it can only ever insert its own row.
-create policy "orders_insert_own" on public.orders
-  for insert with check (auth.uid() = user_id);
-
--- The verify-payment function updates on behalf of the logged-in
--- shopper (forwarding their JWT) when they return from Instamojo.
-create policy "orders_update_own" on public.orders
-  for update using (auth.uid() = user_id) with check (auth.uid() = user_id);
-
--- No policy exists for the webhook path on purpose: Instamojo's
--- server-to-server callback carries no Supabase session at all, so no
--- auth.uid()-based policy can ever match it. That function instead
--- uses the service-role key (SUPABASE_SERVICE_ROLE_KEY), which
--- bypasses RLS entirely, and proves its own legitimacy by verifying
--- Instamojo's HMAC signature before writing anything.
+-- Deliberately NO insert/update policy for shoppers. All writes
+-- (create-payment.js, verify-payment.js, instamojo-webhook.js) go
+-- through the service-role key instead, which bypasses RLS entirely.
+-- This is intentional, not an oversight: if a shopper's own JWT could
+-- write this table directly (even "only their own row"), nothing
+-- would stop them from calling Supabase's REST API themselves — e.g.
+-- from devtools — and setting status='paid' on their own order
+-- without ever paying, or inserting a fresh row already marked paid.
+-- Authorization for writes lives in the server code instead (it
+-- verifies the shopper's identity via their JWT, then explicitly
+-- filters/checks row ownership itself before writing with the
+-- elevated key) — see SUPABASE_SERVICE_ROLE_KEY in api/_lib/supabaseAdmin.js.

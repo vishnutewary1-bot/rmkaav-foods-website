@@ -341,7 +341,6 @@
         try {
           window.localStorage.setItem(LAST_ORDER_KEY, JSON.stringify(order));
         } catch (e) { /* ignore */ }
-        window.open(buildWhatsAppOrderMessage(order), '_blank', 'noopener');
         writeCart([]);
         showConfirmation(order);
         return;
@@ -435,8 +434,8 @@
 
       if (body.status === 'paid') {
         verifying.hidden = true;
-        window.open(buildWhatsAppOrderMessage(body.order), '_blank', 'noopener');
         writeCart([]);
+        body.order.paid = true;
         showConfirmation(body.order);
         return;
       }
@@ -451,7 +450,7 @@
 
     verifying.hidden = true;
     renderCartPage();
-    showPaymentError("We're still confirming your payment — we'll message you on WhatsApp once it's done. Keep your Ref handy.");
+    showPaymentError("We're still confirming your payment. If it went through, hold onto your Ref and WhatsApp us — otherwise please try again.");
   }
 
   function buildWhatsAppOrderMessage(order) {
@@ -479,7 +478,7 @@
       lines.push('Notes: ' + order.details.notes);
     }
     lines.push('');
-    lines.push('Please confirm and share payment details.');
+    lines.push(order.paid ? 'Payment already received via Instamojo — thank you!' : 'Please confirm and share payment details.');
     return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
   }
 
@@ -492,6 +491,8 @@
     if (empty) empty.hidden = true;
     setText('confirmation-ref', order.ref);
     setText('confirmation-total', formatRupees(order.totals.total));
+    const waLink = document.getElementById('confirmation-whatsapp-link');
+    if (waLink) waLink.href = buildWhatsAppOrderMessage(order);
     confirmation.hidden = false;
     confirmation.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
