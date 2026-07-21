@@ -31,7 +31,7 @@ def note(check, detail):
 def pages():
     """Every deployed HTML page (templates are partials, not pages)."""
     return sorted(f for f in glob.glob('**/*.html', recursive=True)
-                  if not f.startswith('assets/'))
+                  if not f.startswith('assets/') and not f.startswith('node_modules/'))
 
 
 def read(f):

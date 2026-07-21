@@ -16,9 +16,10 @@ sitemap matches the indexable pages on disk.
 
     npm install jsdom
     node scripts/test_functionality.js
-    node scripts/test_razorpay_upgrade.js
+    node scripts/test_cart.js
+    node scripts/test_instamojo_helpers.js
 
 The first drives the real DOM: order buttons, photo gallery, nav dropdown,
-and both forms. The second proves that pasting a Razorpay URL into the
-PRODUCTS config in `assets/js/main.js` flips every Buy Now button to real
-checkout without touching any HTML.
+and both forms. The second drives the cart/checkout page. The third is a
+plain-Node unit test (no DOM) for the server-side pricing and Instamojo
+webhook-signature helpers used by `api/`.

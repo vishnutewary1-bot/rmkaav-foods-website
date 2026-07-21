@@ -3,15 +3,11 @@
    ============================================================
 
    Single source of truth for product prices and store-wide order
-   settings. Both the browser (cart, Buy Now buttons) and, from Phase 4
-   onward, server-side order pricing read from this one file — so a
-   price only ever needs to change in one place.
-
-   WHEN YOUR RAZORPAY ACCOUNT IS READY:
-   Paste each product's Razorpay Payment Page URL into `razorpayUrl`
-   below. That is the whole job — every single-item "Buy Now" button
-   picks it up automatically. While a razorpayUrl is empty (''), that
-   product's Buy Now button falls back to a WhatsApp order instead.
+   settings. The browser (cart, Buy Now buttons) reads this file
+   directly via <script>; the Instamojo payment functions in api/
+   `require()` it too (see api/_lib/pricing.js), so a price only ever
+   needs to change in one place, and server-side order totals can
+   never drift from what the shopper sees.
    ============================================================ */
 (function () {
   'use strict';
@@ -22,32 +18,28 @@
       weight: '50g',
       price: 249,
       image: '/assets/images/products/birchun-1.webp',
-      url: '/products/birchun-powder.html',
-      razorpayUrl: ''
+      url: '/products/birchun-powder.html'
     },
     'kaitha-powder': {
       name: 'Kaitha Powder',
       weight: '50g',
       price: 249,
       image: '/assets/images/products/kaitha-powder-1.webp',
-      url: '/products/kaitha-powder.html',
-      razorpayUrl: ''
+      url: '/products/kaitha-powder.html'
     },
     'kaitha-guda': {
       name: 'Kaitha Guda',
       weight: '250g',
       price: 399,
       image: '/assets/images/products/kaitha-guda-1.webp',
-      url: '/products/kaitha-guda.html',
-      razorpayUrl: ''
+      url: '/products/kaitha-guda.html'
     },
     'kaitha-buknu': {
       name: 'Kaitha Buknu Powder',
       weight: '',        // TODO: net weight not yet confirmed by RMKAAV
       price: 269,
       image: '/assets/images/products/kaitha-buknu-1.webp',
-      url: '/products/kaitha-buknu-powder.html',
-      razorpayUrl: ''
+      url: '/products/kaitha-buknu-powder.html'
     }
   };
 

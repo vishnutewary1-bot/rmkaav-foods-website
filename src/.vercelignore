@@ -30,7 +30,7 @@ Thumbs.db
 .git/
 .gitignore
 
-# Test tooling — never deploy
+# Test tooling — never deploy (package.json/package-lock.json ARE
+# needed at deploy time now, for the @supabase/supabase-js runtime
+# dependency the api/ functions use — don't re-add them here)
 node_modules/
-package.json
-package-lock.json

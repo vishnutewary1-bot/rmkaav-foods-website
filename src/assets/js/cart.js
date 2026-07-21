@@ -12,11 +12,17 @@
    any page where auth.js is loaded — see requireSession() below. Pages
    that don't load auth.js (e.g. the test harness) skip the gate.
 
-   PAYMENT (future phase): Place Order should call a server-side
-   Instamojo payment-request function instead of building a WhatsApp
-   message. Until then, the site stays sellable exactly the way the
-   single-item Buy Now buttons already do — WhatsApp with the full
-   order pre-filled.
+   PAYMENT: Place Order calls api/create-payment.js, which starts a
+   real Instamojo checkout and returns a hosted payment URL to send the
+   shopper to. The cart is only cleared and the WhatsApp fulfillment
+   message only sent once the shopper returns and api/verify-payment.js
+   confirms the payment actually went through (see handlePaymentReturn
+   below) — never on the honor system the old WhatsApp-only flow used.
+
+   If window.fetch or window.RMKAAV_AUTH aren't available (e.g. the
+   Supabase CDN script failed to load), Place Order falls back to the
+   original WhatsApp-only handoff so the site stays sellable rather
+   than silently breaking.
    ============================================================ */
 (function () {
   'use strict';
@@ -250,6 +256,7 @@
   }
 
   renderCartPage();
+  handlePaymentReturn();
 
   // ----- Checkout form -----
   const checkoutForm = document.getElementById('checkout-form');
@@ -297,23 +304,43 @@
         window.localStorage.setItem(DETAILS_KEY, JSON.stringify(details));
       } catch (e) { /* ignore */ }
 
-      const order = {
-        ref: buildOrderRef(),
-        cart: cart,
-        details: details,
-        totals: cartTotals(cart)
-      };
+      showPaymentError(null);
 
+      if (!(window.fetch && window.RMKAAV_AUTH)) {
+        // No payment backend reachable — fall back to the original
+        // WhatsApp-only handoff so the site stays sellable.
+        const order = { ref: buildOrderRef(), cart: cart, details: details, totals: cartTotals(cart) };
+        try {
+          window.localStorage.setItem(LAST_ORDER_KEY, JSON.stringify(order));
+        } catch (e) { /* ignore */ }
+        window.open(buildWhatsAppOrderMessage(order), '_blank', 'noopener');
+        writeCart([]);
+        showConfirmation(order);
+        return;
+      }
+
+      setPlaceOrderBusy(true);
       try {
-        window.localStorage.setItem(LAST_ORDER_KEY, JSON.stringify(order));
-      } catch (e) { /* ignore */ }
-
-      window.open(buildWhatsAppOrderMessage(order), '_blank', 'noopener');
-      writeCart([]);
-      showConfirmation(order);
+        const session = await window.RMKAAV_AUTH.getSession();
+        const res = await fetch('/api/create-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + session.access_token },
+          body: JSON.stringify({ cart: cart, details: details })
+        });
+        const body = await res.json();
+        if (!res.ok || !body.checkoutUrl) {
+          throw new Error(body.error || 'Could not start payment. Please try again.');
+        }
+        window.location.href = body.checkoutUrl;
+      } catch (err) {
+        setPlaceOrderBusy(false);
+        showPaymentError(err.message || 'Could not start payment. Please try again.');
+      }
     });
   }
 
+  // Kept only for the no-payment-backend fallback path above — the
+  // real flow generates the ref server-side in api/create-payment.js.
   function buildOrderRef() {
     const d = new Date();
     const y = d.getFullYear();
@@ -321,6 +348,82 @@
     const day = String(d.getDate()).padStart(2, '0');
     const rand = Math.random().toString(36).slice(2, 6).toUpperCase();
     return 'RMK-' + y + m + day + '-' + rand;
+  }
+
+  function setPlaceOrderBusy(busy) {
+    document.querySelectorAll('#checkout-form button[type="submit"], .cart-summary__mobile-bar button[type="submit"]')
+      .forEach(function (btn) {
+        btn.disabled = busy;
+        if (busy) { btn.dataset.originalText = btn.textContent; btn.textContent = 'Processing…'; }
+        else if (btn.dataset.originalText) { btn.textContent = btn.dataset.originalText; }
+      });
+  }
+
+  function showPaymentError(message) {
+    const el = document.getElementById('payment-error');
+    if (!el) return;
+    if (!message) { el.hidden = true; el.textContent = ''; return; }
+    el.textContent = message;
+    el.hidden = false;
+  }
+
+  // ----- Return trip from Instamojo's hosted checkout -----
+  // Never trusts the redirect's own payment_status query param (it's
+  // client-supplied/editable) — always re-confirms with the server,
+  // which itself re-checks with Instamojo directly.
+  async function handlePaymentReturn() {
+    const params = new URLSearchParams(window.location.search);
+    const paymentRequestId = params.get('payment_request_id');
+    const paymentId = params.get('payment_id');
+    if (!paymentRequestId || !paymentId) return;
+
+    // Strip the params immediately so a refresh doesn't re-trigger this.
+    window.history.replaceState(null, '', window.location.pathname);
+
+    const verifying = document.getElementById('payment-verifying');
+    if (!verifying || !(window.fetch && window.RMKAAV_AUTH)) return;
+
+    const empty = document.getElementById('cart-empty');
+    const main = document.getElementById('cart-main');
+    if (empty) empty.hidden = true;
+    if (main) main.hidden = true;
+    verifying.hidden = false;
+
+    const session = await window.RMKAAV_AUTH.getSession();
+    if (!session) { verifying.hidden = true; renderCartPage(); return; }
+
+    for (let attempt = 0; attempt < 4; attempt++) {
+      let body;
+      try {
+        const res = await fetch('/api/verify-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + session.access_token },
+          body: JSON.stringify({ payment_request_id: paymentRequestId, payment_id: paymentId })
+        });
+        body = await res.json();
+      } catch (e) {
+        break;
+      }
+
+      if (body.status === 'paid') {
+        verifying.hidden = true;
+        window.open(buildWhatsAppOrderMessage(body.order), '_blank', 'noopener');
+        writeCart([]);
+        showConfirmation(body.order);
+        return;
+      }
+      if (body.status === 'failed') {
+        verifying.hidden = true;
+        renderCartPage();
+        showPaymentError('Your payment did not go through. Your cart has been kept — please try again.');
+        return;
+      }
+      await new Promise(function (resolve) { window.setTimeout(resolve, 1500); });
+    }
+
+    verifying.hidden = true;
+    renderCartPage();
+    showPaymentError("We're still confirming your payment — we'll message you on WhatsApp once it's done. Keep your Ref handy.");
   }
 
   function buildWhatsAppOrderMessage(order) {

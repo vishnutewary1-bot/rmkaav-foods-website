@@ -24,7 +24,7 @@ let d = w.document;
 const buys = [...d.querySelectorAll('[data-order]')];
 ok(buys.length === 2, `2 Buy Now buttons wired (found ${buys.length})`);
 ok(buys.every(b => b.href.startsWith('https://wa.me/917068946333')),
-   'both route to WhatsApp while Razorpay is unconfigured');
+   'both route to WhatsApp, working even with JS disabled');
 const msg = decodeURIComponent(buys[0].href.split('text=')[1]);
 ok(msg.includes('Birchun Powder (50g)') && msg.includes('₹249'),
    'order message carries product, size and price');

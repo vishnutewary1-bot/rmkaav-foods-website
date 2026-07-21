@@ -10,11 +10,11 @@
      ORDER CONFIGURATION
      ============================================================
 
-     Product prices and Razorpay Payment Page URLs live in
-     assets/js/products-data.js now (loaded before this file on every
-     page) — that is the only block you need to edit. main.js just
-     reads it as window.RMKAAV_PRODUCTS / window.RMKAAV_WHATSAPP_NUMBER
-     so cart.js can share the exact same catalog.
+     Product prices live in assets/js/products-data.js now (loaded
+     before this file on every page) — that is the only block you need
+     to edit. main.js just reads it as window.RMKAAV_PRODUCTS /
+     window.RMKAAV_WHATSAPP_NUMBER so cart.js can share the exact same
+     catalog.
      ============================================================ */
   const PRODUCTS = window.RMKAAV_PRODUCTS || {};
   const WHATSAPP_NUMBER = window.RMKAAV_WHATSAPP_NUMBER || '917068946333';
@@ -39,8 +39,9 @@
 
   // ----- Order buttons -----
   // Every [data-order] button ships with a working WhatsApp order link
-  // already in its href, so it functions with JavaScript disabled.
-  // If a razorpayUrl is configured, we upgrade the button to real checkout.
+  // already in its href, so it functions with JavaScript disabled. This
+  // single-item flow is separate from the cart/checkout (which uses
+  // real Instamojo payment via cart.js) — it stays WhatsApp-only.
   function buildWhatsAppOrder(p) {
     const size = p.weight ? ' (' + p.weight + ')' : '';
     const msg = "Hi RMKAAV, I'd like to order:\n\n"
@@ -53,30 +54,10 @@
   document.querySelectorAll('[data-order]').forEach(function (btn) {
     const product = PRODUCTS[btn.getAttribute('data-order')];
     if (!product) return;
-
-    if (product.razorpayUrl) {
-      // Razorpay configured — send the buyer straight to checkout.
-      btn.href = product.razorpayUrl;
-      btn.removeAttribute('target');
-      btn.removeAttribute('rel');
-    } else {
-      // No payment gateway yet — order via WhatsApp, fully pre-filled.
-      btn.href = buildWhatsAppOrder(product);
-      btn.setAttribute('target', '_blank');
-      btn.setAttribute('rel', 'noopener');
-    }
+    btn.href = buildWhatsAppOrder(product);
+    btn.setAttribute('target', '_blank');
+    btn.setAttribute('rel', 'noopener');
   });
-
-  // Reflect the real payment route in the trust row, so we never
-  // advertise a checkout that does not exist.
-  const razorpayLive = Object.keys(PRODUCTS).some(function (k) {
-    return !!PRODUCTS[k].razorpayUrl;
-  });
-  if (razorpayLive) {
-    document.querySelectorAll('[data-payment-note]').forEach(function (el) {
-      el.textContent = '🔒 Secure Razorpay checkout';
-    });
-  }
 
   // ----- Form submission -----
   // Posts to the configured endpoint and reports the outcome inline.
