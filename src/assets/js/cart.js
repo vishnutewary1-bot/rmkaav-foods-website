@@ -261,15 +261,43 @@
   // ----- Checkout form -----
   const checkoutForm = document.getElementById('checkout-form');
   if (checkoutForm) {
+    // Prefill: locally-remembered details fill in first (works for
+    // guests too), then the shopper's saved account profile — set on
+    // account.html, see auth.js's getProfile() — overrides with
+    // whatever it has, since it's the more authoritative "saved
+    // address". One-way only: editing the checkout form never writes
+    // back to the saved profile, so a one-off shipping address here
+    // doesn't silently overwrite what's saved on the account page.
+    function fillField(key, value, force) {
+      const field = checkoutForm.elements.namedItem(key);
+      if (!field || !value) return;
+      if (force || !field.value) field.value = value;
+    }
+
     try {
       const saved = JSON.parse(window.localStorage.getItem(DETAILS_KEY) || 'null');
       if (saved) {
-        Object.keys(saved).forEach(function (key) {
-          const field = checkoutForm.elements.namedItem(key);
-          if (field) field.value = saved[key];
-        });
+        Object.keys(saved).forEach(function (key) { fillField(key, saved[key], false); });
       }
     } catch (e) { /* ignore bad stored data */ }
+
+    (async function prefillFromProfile() {
+      if (!window.RMKAAV_AUTH) return;
+      try {
+        const session = await window.RMKAAV_AUTH.getSession();
+        if (!session) return;
+        const profile = await window.RMKAAV_AUTH.getProfile(session.user.id);
+        if (!profile) return;
+        fillField('name', profile.full_name, true);
+        fillField('phone', profile.phone, true);
+        fillField('email', session.user.email, true);
+        fillField('addr1', profile.address_line1, true);
+        fillField('addr2', profile.address_line2, true);
+        fillField('city', profile.city, true);
+        fillField('state', profile.state, true);
+        fillField('pincode', profile.pincode, true);
+      } catch (e) { /* ignore — keep whatever the local prefill already set */ }
+    })();
 
     checkoutForm.addEventListener('submit', async function (e) {
       e.preventDefault();
