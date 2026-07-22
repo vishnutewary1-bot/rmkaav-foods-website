@@ -85,10 +85,45 @@
       <!-- 1. PAGE HERO -->
       <section class="page-hero page-hero--about">
         <div class="page-hero__scene" aria-hidden="true">
-          <svg viewBox="0 0 1440 130" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 1440 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <path id="ab-fern" d="M0,0 C-7,-34 0,-78 11,-100 C22,-78 29,-34 22,0 Z"/>
+              <path id="ab-leaf" d="M0,0 C-9,-40 0,-92 13,-118 C26,-92 35,-40 26,0 Z"/>
             </defs>
+
+            <!-- Two arch niches, tan fill + terracotta outline, echoing the mural -->
+            <path d="M40,500 L40,260 A110,110 0 0 1 260,260 L260,500 Z" fill="var(--color-camel)" stroke="var(--mural-sun)" stroke-width="6"/>
+            <path d="M1180,500 L1180,260 A110,110 0 0 1 1400,260 L1400,500 Z" fill="var(--color-camel)" stroke="var(--mural-sun)" stroke-width="6"/>
+
+            <!-- Left arch: a vertical blossom spike -->
+            <line x1="150" y1="480" x2="150" y2="230" stroke="var(--mural-forest)" stroke-width="4"/>
+            <use href="#ab-leaf" transform="translate(130,480) rotate(-20) scale(0.6)" fill="var(--mural-forest)"/>
+            <use href="#ab-leaf" transform="translate(170,480) rotate(20) scale(0.6)"  fill="var(--mural-olive)"/>
+            <g>
+              <circle cx="150" cy="215" r="9" fill="var(--mural-blossom-3)"/>
+              <circle cx="165" cy="228" r="8" fill="var(--mural-blossom-2)"/>
+              <circle cx="135" cy="235" r="8" fill="var(--mural-blossom-1)"/>
+              <circle cx="150" cy="245" r="9" fill="var(--mural-blossom-4)"/>
+              <circle cx="170" cy="255" r="7" fill="var(--mural-blossom-2)"/>
+              <circle cx="130" cy="260" r="7" fill="var(--mural-blossom-1)"/>
+              <circle cx="152" cy="268" r="8" fill="var(--mural-blossom-3)"/>
+              <circle cx="140" cy="200" r="7" fill="var(--mural-blossom-2)"/>
+              <circle cx="160" cy="200" r="6" fill="var(--mural-blossom-1)"/>
+              <circle cx="150" cy="188" r="6" fill="var(--mural-blossom-4)"/>
+            </g>
+
+            <!-- Right arch: a fanned leafy plant -->
+            <use href="#ab-leaf" transform="translate(1290,480) rotate(-50) scale(0.85)" fill="var(--mural-forest)"/>
+            <use href="#ab-leaf" transform="translate(1290,480) rotate(-25) scale(1.0)"  fill="var(--mural-olive)"/>
+            <use href="#ab-leaf" transform="translate(1290,480) rotate(0) scale(1.1)"    fill="var(--mural-moss)"/>
+            <use href="#ab-leaf" transform="translate(1290,480) rotate(25) scale(1.0)"   fill="var(--mural-sage)"/>
+            <use href="#ab-leaf" transform="translate(1290,480) rotate(50) scale(0.85)"  fill="var(--mural-bottle)"/>
+
+            <!-- Fern draping from the top-left, outside the arch -->
+            <use href="#ab-fern" transform="translate(95,270) rotate(-24) scale(2.4)" fill="var(--mural-forest)"/>
+            <use href="#ab-fern" transform="translate(70,255) rotate(-8) scale(1.6)"  fill="var(--mural-olive)"/>
+
+            <!-- Cascading blossom clusters along the top edge -->
             <g>
               <circle cx="60" cy="8" r="14" fill="var(--mural-blossom-3)"/>
               <circle cx="95" cy="22" r="12" fill="var(--mural-blossom-2)"/>
@@ -97,6 +132,7 @@
               <circle cx="150" cy="14" r="13" fill="var(--mural-blossom-2)"/>
               <circle cx="180" cy="44" r="9" fill="var(--mural-blossom-1)"/>
               <circle cx="10" cy="60" r="8" fill="var(--mural-blossom-3)"/>
+              <circle cx="220" cy="20" r="10" fill="var(--mural-blossom-4)"/>
               <circle cx="1380" cy="8" r="14" fill="var(--mural-blossom-3)"/>
               <circle cx="1345" cy="22" r="12" fill="var(--mural-blossom-2)"/>
               <circle cx="1400" cy="38" r="11" fill="var(--mural-blossom-1)"/>
@@ -104,14 +140,11 @@
               <circle cx="1290" cy="14" r="13" fill="var(--mural-blossom-2)"/>
               <circle cx="1260" cy="44" r="9" fill="var(--mural-blossom-1)"/>
               <circle cx="1430" cy="60" r="8" fill="var(--mural-blossom-3)"/>
+              <circle cx="1220" cy="20" r="10" fill="var(--mural-blossom-4)"/>
               <circle cx="640" cy="6" r="7" fill="var(--mural-blossom-2)"/>
               <circle cx="720" cy="12" r="6" fill="var(--mural-blossom-1)"/>
               <circle cx="800" cy="6" r="7" fill="var(--mural-blossom-3)"/>
             </g>
-            <use href="#ab-fern" transform="translate(20,130) rotate(-10) scale(0.7)" fill="var(--mural-forest)"/>
-            <use href="#ab-fern" transform="translate(55,130) rotate(8) scale(0.5)"   fill="var(--mural-olive)"/>
-            <use href="#ab-fern" transform="translate(1420,130) rotate(10) scale(0.7)" fill="var(--mural-forest)"/>
-            <use href="#ab-fern" transform="translate(1385,130) rotate(-8) scale(0.5)" fill="var(--mural-olive)"/>
           </svg>
         </div>
         <div class="container">
