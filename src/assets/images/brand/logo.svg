@@ -5,10 +5,10 @@
         font-size="44"
         font-weight="500"
         letter-spacing="5.3"
-        fill="#3A2418">RMKAAV</text>
-  <g transform="translate(200, 110)" fill="none" stroke="#C9A04A" stroke-width="1.4" stroke-linecap="round">
+        fill="#2E1810">RMKAAV</text>
+  <g transform="translate(200, 110)" fill="none" stroke="#5F7A3D" stroke-width="1.4" stroke-linecap="round">
     <path d="M -55,0 Q -42,-8 -28,0 Q -22,4 -16,0"/>
-    <circle cx="0" cy="0" r="3" fill="#C9A04A" stroke="none"/>
+    <circle cx="0" cy="0" r="3" fill="#5F7A3D" stroke="none"/>
     <path d="M -10,-6 Q 0,-12 10,-6"/>
     <path d="M -10,6 Q 0,12 10,6"/>
     <path d="M 16,0 Q 22,4 28,0 Q 42,-8 55,0"/>
@@ -19,5 +19,5 @@
         font-size="18"
         font-weight="300"
         letter-spacing="5"
-        fill="#3A2418">F O O D S</text>
+        fill="#2E1810">F O O D S</text>
 </svg>

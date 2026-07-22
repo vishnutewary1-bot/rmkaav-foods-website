@@ -26,30 +26,36 @@
    as aliases so existing selectors keep working without refactor.
    ============================================================ */
 :root {
-  /* Semantic palette — Banda Delights brand board (2026-05-09 v3)
-     Cream + dark brown + olive + vivid orange + mustard + tan.
-     Sampled from the official brand identity board. */
-  --color-primary:        #DD7A2C;  /* Vivid orange — CTAs, primary actions */
-  --color-primary-hover:  #C26218;  /* Darker orange — CTA hover */
-  --color-accent:         #708840;  /* Olive green — links, accents, ✓ */
-  --color-accent-hover:   #5C7034;  /* Darker olive — link hover */
-  --color-bg:             #F4EBD3;  /* Warm cream — page background */
-  --color-bg-alt:         #E8DCC0;  /* Deeper cream — section alternation */
+  /* Semantic palette — Botanical redesign (2026-07-22)
+     Forest/olive greens + warm white/cream/sand + terracotta/camel brown
+     + a soft rose accent + a sparing mustard highlight.
+     Weighted from a botanical reference board: green ~39%, white/neutral
+     ~47%, brown/terracotta ~8%, pink/rose ~5%, mustard highlight ~1%. */
+  --color-primary:        #3D6B4F;  /* Forest green — CTAs, primary actions */
+  --color-primary-hover:  #2C5039;  /* Darker forest green — CTA hover */
+  --color-accent:         #6E7F3D;  /* Olive green — links, accents, ✓ */
+  --color-accent-hover:   #56612F;  /* Darker olive — link hover */
+  --color-bg:             #FBF8F1;  /* Warm white — page background */
+  --color-bg-alt:         #EFE6D3;  /* Sand / beige — section alternation */
   --color-text:           #2E1810;  /* Dark brown — body text */
   --color-text-muted:     #6B5A48;  /* Warm taupe — sub text */
-  --color-rule:           #D4C5A8;  /* Warm tan — borders / dividers */
-  --color-highlight:      #E2B340;  /* Mustard — decorative pop, optional */
-  --color-success:        #708840;  /* same as accent */
-  --color-error:          #B22222;
+  --color-rule:           #DCD4B8;  /* Sage-beige — borders / dividers */
+  --color-highlight:      #C9A227;  /* Mustard — decorative pop, sparing use */
+  --color-success:        #5F7A3D;  /* Moss green */
+  --color-error:          #B4472E;  /* Warm terracotta-red */
   --color-wa-green:       #25D366;
   --color-white:          #FFFFFF;
+  --color-terracotta:      #C1694F;  /* Secondary accent — tags, ribbons */
+  --color-terracotta-hover: #A65640;
+  --color-blush:           #D9A0A6;  /* Dusty rose — sparing decorative accent */
+  --color-blush-light:     #F3DEE1;  /* Soft pink tint — subtle callout bg */
 
   /* Legacy aliases — old selectors reference these names. Map to new. */
   --color-saffron:        var(--color-primary);
   --color-saffron-dark:   var(--color-primary-hover);
   --color-maroon:         var(--color-text);
   --color-gold:           var(--color-highlight);
-  --color-gold-light:     #EFD787;  /* mustard-cream — footer accent */
+  --color-gold-light:     #EFE3B0;  /* mustard-cream — footer accent */
   --color-cream:          var(--color-bg);
   --color-cream-darker:   var(--color-bg-alt);
   --color-brown:          var(--color-text);
@@ -3153,13 +3159,13 @@ main p a:not(.btn):not(.btn--text):not(.product-card__cta):hover {
 .form-status--success {
   background-color: #E8F0DC;
   color: #3D4A22;
-  border: 1px solid #708840;
+  border: 1px solid var(--color-success);
 }
 
 .form-status--error {
   background-color: #F7E3DC;
   color: #7A2E12;
-  border: 1px solid #C26218;
+  border: 1px solid var(--color-error);
 }
 
 /* ============================================================
