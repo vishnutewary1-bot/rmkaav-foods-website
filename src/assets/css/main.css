@@ -2079,24 +2079,30 @@ p:last-child {
   line-height: 1.5;
 }
 
-/* About page — pink/magenta cascading-blossom mural band (a third,
-   distinct combination: no green-dominant or terracotta/sand mix here). */
+/* About page — full arch-and-blossom mural scene (a third, distinct
+   combination: pink/magenta blossoms + tan/terracotta arch niches +
+   green ferns, no green-dominant or terracotta/sand hill mix here). */
 .page-hero--about {
   position: relative;
   overflow: hidden;
+  padding-top: var(--sp-5xl);
+  padding-bottom: var(--sp-4xl);
 }
 
 .page-hero--about .container {
   position: relative;
   z-index: 1;
+  max-width: 720px;
+  background: rgba(242, 239, 232, 0.88);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 20px;
+  padding: var(--sp-xl) var(--sp-lg);
 }
 
 .page-hero__scene {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 130px;
+  inset: 0;
   z-index: 0;
   opacity: 0.95;
   pointer-events: none;
