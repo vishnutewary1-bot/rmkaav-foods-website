@@ -66,6 +66,7 @@
   --mural-blossom-3:    #7A3355;
   --mural-blossom-4:    #C9A8D6;
   --mural-flower-white: #FFFFFF;
+  --mural-highlight:    #C7D66B;  /* yellow-green leaf-vein highlight */
 
   /* Legacy aliases — old selectors reference these names. Map to new. */
   --color-saffron:        var(--color-primary);
@@ -1095,7 +1096,7 @@ p:last-child {
   position: absolute;
   inset: 0;
   z-index: 0;
-  opacity: 0.22;
+  opacity: 0.44;
   pointer-events: none;
   overflow: hidden;
 }
@@ -1545,7 +1546,7 @@ p:last-child {
   position: absolute;
   inset: 0;
   z-index: 0;
-  opacity: 0.16;
+  opacity: 0.32;
   pointer-events: none;
   overflow: hidden;
 }
