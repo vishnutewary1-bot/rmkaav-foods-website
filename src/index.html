@@ -71,6 +71,20 @@
 </head>
 <body>
 
+  <!-- Shared decorative shapes — reused via <use href="#..."> across the
+       page. Kept out of layout flow entirely. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <path id="torn-edge-shape" d="M0,22 L40,8 L75,28 L110,5 L150,32 L190,12 L230,26 L270,4 L310,30 L350,10 L395,24 L430,2 L470,28 L515,14 L555,32 L600,6 L640,26 L685,10 L725,30 L770,4 L810,24 L855,14 L895,32 L935,8 L975,26 L1020,2 L1060,28 L1105,12 L1145,24 L1190,6 L1230,30 L1270,10 L1310,26 L1355,4 L1400,28 L1440,14 L1440,60 L0,60 Z"/>
+      <g id="leaf-sprig">
+        <path d="M0,0 C10,-2 22,0 30,8" fill="none" stroke-width="2" stroke-linecap="round"/>
+        <path d="M6,-3 C2,-9 3,-16 8,-20 C13,-16 14,-9 10,-3 Z"/>
+        <path d="M14,1 C11,-6 12,-13 17,-17 C22,-13 23,-6 20,1 Z"/>
+        <path d="M22,5 C20,-1 21,-7 25,-11 C29,-7 30,-1 28,5 Z"/>
+      </g>
+    </defs>
+  </svg>
+
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <div class="page-wrap">
@@ -161,55 +175,11 @@
            1. HERO
            ==================================================== -->
       <section class="hero">
-        <div class="hero__scene" aria-hidden="true">
-          <svg viewBox="0 0 1440 640" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <path id="hero-leaf" d="M0,0 C-7,-34 0,-78 11,-100 C22,-78 29,-34 22,0 Z"/>
-              <path id="hero-leaf-vein" d="M4,-6 C0,-34 5,-66 11,-84 C17,-66 22,-34 18,-6 Z"/>
-              <g id="hero-jasmine">
-                <circle cx="0" cy="-5" r="4.2" fill="var(--mural-flower-white)"/>
-                <circle cx="4.76" cy="-1.55" r="4.2" fill="var(--mural-flower-white)"/>
-                <circle cx="2.94" cy="4.04" r="4.2" fill="var(--mural-flower-white)"/>
-                <circle cx="-2.94" cy="4.04" r="4.2" fill="var(--mural-flower-white)"/>
-                <circle cx="-4.76" cy="-1.55" r="4.2" fill="var(--mural-flower-white)"/>
-                <circle cx="0" cy="0" r="2.2" fill="var(--mural-highlight)"/>
-              </g>
-            </defs>
-            <circle cx="230" cy="120" r="150" fill="var(--mural-sun)"/>
-            <path d="M0,260 Q220,190 460,240 T960,210 T1440,250 L1440,640 L0,640 Z" fill="var(--mural-sand-light)"/>
-            <path d="M0,360 Q260,300 560,345 T1080,320 T1440,360 L1440,640 L0,640 Z" fill="var(--mural-sand-deep)"/>
-            <use href="#hero-jasmine" transform="translate(170,150) scale(1.3)"/>
-            <use href="#hero-jasmine" transform="translate(340,90) scale(1.1)"/>
-            <use href="#hero-jasmine" transform="translate(560,200) scale(1.4)"/>
-            <use href="#hero-jasmine" transform="translate(760,140) scale(1.2)"/>
-            <use href="#hero-jasmine" transform="translate(980,230) scale(1.3)"/>
-            <use href="#hero-jasmine" transform="translate(1180,170) scale(1.1)"/>
-            <use href="#hero-jasmine" transform="translate(1340,220) scale(1.4)"/>
-            <use href="#hero-leaf" transform="translate(20,640) rotate(-10) scale(1.5)"   fill="var(--mural-forest)"/>
-            <use href="#hero-leaf-vein" transform="translate(20,640) rotate(-10) scale(1.5)"   fill="var(--mural-highlight)"/>
-            <use href="#hero-leaf" transform="translate(140,640) rotate(8) scale(1.2)"    fill="var(--mural-olive)"/>
-            <use href="#hero-leaf-vein" transform="translate(140,640) rotate(8) scale(1.2)"    fill="var(--mural-highlight)"/>
-            <use href="#hero-leaf" transform="translate(260,640) rotate(-6) scale(1.7)"   fill="var(--mural-bottle)"/>
-            <use href="#hero-leaf-vein" transform="translate(260,640) rotate(-6) scale(1.7)"   fill="var(--mural-sage)"/>
-            <use href="#hero-leaf" transform="translate(380,640) rotate(10) scale(1.1)"   fill="var(--mural-sage)"/>
-            <use href="#hero-leaf-vein" transform="translate(380,640) rotate(10) scale(1.1)"   fill="var(--mural-highlight)"/>
-            <use href="#hero-leaf" transform="translate(500,640) rotate(-4) scale(1.4)"   fill="var(--mural-moss)"/>
-            <use href="#hero-leaf-vein" transform="translate(500,640) rotate(-4) scale(1.4)"   fill="var(--mural-highlight)"/>
-            <use href="#hero-leaf" transform="translate(620,640) rotate(6) scale(1.2)"    fill="var(--mural-forest)"/>
-            <use href="#hero-leaf-vein" transform="translate(620,640) rotate(6) scale(1.2)"    fill="var(--mural-highlight)"/>
-            <use href="#hero-leaf" transform="translate(760,640) rotate(-8) scale(1.6)"   fill="var(--mural-olive)"/>
-            <use href="#hero-leaf-vein" transform="translate(760,640) rotate(-8) scale(1.6)"   fill="var(--mural-highlight)"/>
-            <use href="#hero-leaf" transform="translate(880,640) rotate(4) scale(1.1)"    fill="var(--mural-bottle)"/>
-            <use href="#hero-leaf-vein" transform="translate(880,640) rotate(4) scale(1.1)"    fill="var(--mural-sage)"/>
-            <use href="#hero-leaf" transform="translate(1000,640) rotate(-10) scale(1.3)" fill="var(--mural-sage)"/>
-            <use href="#hero-leaf-vein" transform="translate(1000,640) rotate(-10) scale(1.3)" fill="var(--mural-highlight)"/>
-            <use href="#hero-leaf" transform="translate(1120,640) rotate(8) scale(1.5)"   fill="var(--mural-moss)"/>
-            <use href="#hero-leaf-vein" transform="translate(1120,640) rotate(8) scale(1.5)"   fill="var(--mural-highlight)"/>
-            <use href="#hero-leaf" transform="translate(1260,640) rotate(-6) scale(1.2)"  fill="var(--mural-forest)"/>
-            <use href="#hero-leaf-vein" transform="translate(1260,640) rotate(-6) scale(1.2)"  fill="var(--mural-highlight)"/>
-            <use href="#hero-leaf" transform="translate(1400,640) rotate(6) scale(1.4)"   fill="var(--mural-olive)"/>
-            <use href="#hero-leaf-vein" transform="translate(1400,640) rotate(6) scale(1.4)"   fill="var(--mural-highlight)"/>
-          </svg>
+        <div class="hero__leaf hero__leaf--tl" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><use href="#leaf-sprig" transform="translate(6,34) rotate(-20) scale(1.4)" fill="var(--mural-forest)" stroke="var(--mural-forest)"/></svg>
+        </div>
+        <div class="hero__leaf hero__leaf--tr" aria-hidden="true">
+          <svg viewBox="0 0 40 40"><use href="#leaf-sprig" transform="translate(34,34) scale(-1.4,1.4) rotate(-20)" fill="var(--mural-forest)" stroke="var(--mural-forest)"/></svg>
         </div>
         <div class="container hero__inner">
           <div class="hero__content">
@@ -228,9 +198,15 @@
             </ul>
           </div>
           <div class="hero__image">
+            <div class="hero__image-leaf" aria-hidden="true">
+              <svg viewBox="0 0 40 40"><use href="#leaf-sprig" transform="translate(6,34) rotate(-15) scale(1.6)" fill="var(--mural-olive)" stroke="var(--mural-olive)"/></svg>
+            </div>
             <!-- TODO: replace placeholder with hero photo (Birchun Powder in brass bowl, raw jujube fruits, muslin cloth, warm light) -->
             <img src="/assets/images/products/birchun-1.webp" alt="Birchun Powder in a brass bowl with raw jujube fruits beside it" loading="eager" width="600" height="720">
           </div>
+        </div>
+        <div class="torn-edge" aria-hidden="true">
+          <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><use href="#torn-edge-shape" fill="var(--color-bg)"/></svg>
         </div>
       </section>
 
@@ -289,6 +265,7 @@
             <article class="product-card">
               <a href="/products/birchun-powder.html" class="product-card__link">
                 <div class="product-card__image">
+                  <div class="product-card__leaf" aria-hidden="true"><svg viewBox="0 0 40 40"><use href="#leaf-sprig" transform="translate(6,34) rotate(-20) scale(1.2)" fill="var(--mural-forest)" stroke="var(--mural-forest)"/></svg></div>
                   <img src="/assets/images/products/birchun-1.webp" alt="Birchun Powder &mdash; Indian jujube fruit powder" loading="lazy" width="400" height="400">
                 </div>
                 <h3 class="product-card__name">Birchun Powder</h3>
@@ -301,6 +278,7 @@
             <article class="product-card">
               <a href="/products/kaitha-powder.html" class="product-card__link">
                 <div class="product-card__image">
+                  <div class="product-card__leaf" aria-hidden="true"><svg viewBox="0 0 40 40"><use href="#leaf-sprig" transform="translate(6,34) rotate(-20) scale(1.2)" fill="var(--mural-olive)" stroke="var(--mural-olive)"/></svg></div>
                   <img src="/assets/images/products/kaitha-powder-1.webp" alt="Kaitha Powder &mdash; wood apple fruit powder" loading="lazy" width="400" height="400">
                 </div>
                 <h3 class="product-card__name">Kaitha Powder</h3>
@@ -313,6 +291,7 @@
             <article class="product-card">
               <a href="/products/kaitha-guda.html" class="product-card__link">
                 <div class="product-card__image">
+                  <div class="product-card__leaf" aria-hidden="true"><svg viewBox="0 0 40 40"><use href="#leaf-sprig" transform="translate(6,34) rotate(-20) scale(1.2)" fill="var(--mural-moss)" stroke="var(--mural-moss)"/></svg></div>
                   <img src="/assets/images/products/kaitha-guda-1.webp" alt="Kaitha Guda &mdash; wood apple fruit pulp, 250g" loading="lazy" width="400" height="400">
                 </div>
                 <h3 class="product-card__name">Kaitha Guda</h3>
@@ -325,6 +304,7 @@
             <article class="product-card">
               <a href="/products/kaitha-buknu-powder.html" class="product-card__link">
                 <div class="product-card__image">
+                  <div class="product-card__leaf" aria-hidden="true"><svg viewBox="0 0 40 40"><use href="#leaf-sprig" transform="translate(6,34) rotate(-20) scale(1.2)" fill="var(--mural-sage)" stroke="var(--mural-sage)"/></svg></div>
                   <img src="/assets/images/products/kaitha-buknu-1.webp" alt="Kaitha Buknu Powder &mdash; Ayurvedic digestive churna" loading="lazy" width="400" height="400">
                 </div>
                 <h3 class="product-card__name">Kaitha Buknu Powder</h3>
@@ -558,6 +538,37 @@
               </ul>
             </article>
           </div>
+        </div>
+      </section>
+
+      <!-- ====================================================
+           8b. PROMO BANNER — trust list + bestseller CTA
+           ==================================================== -->
+      <section class="promo-banner">
+        <div class="container">
+          <div class="promo-banner__grid">
+            <div class="promo-banner__feature">
+              <h3>Why RMKAAV</h3>
+              <ul class="promo-banner__list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Single ingredient, nothing else</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Sun-dried and stone-ground in Banda</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> No preservatives, no fillers, ever</li>
+              </ul>
+              <div class="promo-banner__feature-thumb">
+                <img src="/assets/images/products/kaitha-guda-1.webp" alt="Kaitha Guda jar" loading="lazy" width="96" height="96">
+              </div>
+            </div>
+            <div class="promo-banner__cta">
+              <p class="eyebrow">Our bestseller</p>
+              <h3>Kaitha Powder &mdash; the Banda classic</h3>
+              <p>Wood apple, stone-ground the way it's always been. The one jar most customers reorder first.</p>
+              <a href="/products/kaitha-powder.html" class="btn btn--outline-cream">Shop Kaitha Powder &rarr;</a>
+              <img class="promo-banner__cta-photo" src="/assets/images/products/kaitha-powder-1.webp" alt="Kaitha Powder jar" loading="lazy" width="220" height="220">
+            </div>
+          </div>
+        </div>
+        <div class="torn-edge" aria-hidden="true">
+          <svg viewBox="0 0 1440 60" preserveAspectRatio="none"><use href="#torn-edge-shape" fill="var(--color-cream-darker)"/></svg>
         </div>
       </section>
 
