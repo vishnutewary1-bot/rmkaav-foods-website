@@ -50,6 +50,23 @@
   --color-blush:           #D9A0A6;  /* Dusty rose — sparing decorative accent */
   --color-blush-light:     #F3DEE1;  /* Soft pink tint — subtle callout bg */
 
+  /* Mural illustration palette — for the painted botanical scenes on the
+     homepage/product/about heroes only (echoes the reference wall mural).
+     Not general UI tokens — don't reach for these outside those scenes. */
+  --mural-sun:          #C1694F;
+  --mural-sand-light:   #EDE1C6;
+  --mural-sand-deep:    #D9B98F;
+  --mural-forest:       #2C5039;
+  --mural-olive:        #6E7F3D;
+  --mural-moss:         #5F7A3D;
+  --mural-sage:         #8FA35E;
+  --mural-bottle:       #1E3A2A;
+  --mural-blossom-1:    #E7B6C6;
+  --mural-blossom-2:    #C9668F;
+  --mural-blossom-3:    #7A3355;
+  --mural-blossom-4:    #C9A8D6;
+  --mural-flower-white: #FFFFFF;
+
   /* Legacy aliases — old selectors reference these names. Map to new. */
   --color-saffron:        var(--color-primary);
   --color-saffron-dark:   var(--color-primary-hover);
@@ -1072,6 +1089,23 @@ p:last-child {
   position: relative;
 }
 
+/* Hero — full mural scene (terracotta sun, sand hills, foliage), low
+   opacity so it reads as ambient wallpaper behind the real content. */
+.hero__scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.22;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero__scene svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 /* Soft botanical glow behind the product image, in place of a rectangular shadow/clip */
 .hero__image::before {
   content: '';
@@ -1495,6 +1529,8 @@ p:last-child {
    ============================================================ */
 .product-hero {
   padding: var(--sp-2xl) 0 var(--sp-3xl);
+  position: relative;
+  overflow: hidden;
 }
 
 @media (min-width: 768px) {
@@ -1503,10 +1539,29 @@ p:last-child {
   }
 }
 
+/* Product pages — green-and-white only mural scene (no sun/hills), a
+   different combination from the homepage's terracotta+sand+green mix. */
+.product-hero__scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.16;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.product-hero__scene svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .product-hero__inner {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--sp-2xl);
+  position: relative;
+  z-index: 1;
 }
 
 @media (min-width: 768px) {
@@ -1987,6 +2042,36 @@ p:last-child {
   max-width: 56ch;
   margin: 0 auto;
   line-height: 1.5;
+}
+
+/* About page — pink/magenta cascading-blossom mural band (a third,
+   distinct combination: no green-dominant or terracotta/sand mix here). */
+.page-hero--about {
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero--about .container {
+  position: relative;
+  z-index: 1;
+}
+
+.page-hero__scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 130px;
+  z-index: 0;
+  opacity: 0.95;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.page-hero__scene svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 @media (min-width: 768px) {
