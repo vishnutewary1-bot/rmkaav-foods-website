@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice">
-  <rect width="600" height="600" fill="#EFE5D0"/>
-  <g transform="translate(300, 280)" fill="none" stroke="#C9A04A" stroke-width="3" opacity="0.55">
+  <rect width="600" height="600" fill="#EFE6D3"/>
+  <g transform="translate(300, 280)" fill="none" stroke="#5F7A3D" stroke-width="3" opacity="0.55">
     <rect x="-70" y="-50" width="140" height="100" rx="6"/>
     <circle cx="0" cy="5" r="22"/>
-    <circle cx="0" cy="5" r="10" fill="#C9A04A" stroke="none"/>
-    <rect x="-58" y="-58" width="22" height="12" rx="2" fill="#C9A04A" stroke="none"/>
+    <circle cx="0" cy="5" r="10" fill="#5F7A3D" stroke="none"/>
+    <rect x="-58" y="-58" width="22" height="12" rx="2" fill="#5F7A3D" stroke="none"/>
   </g>
-  <text x="300" y="400" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="22" fill="#3A2418" opacity="0.5">Your photo here</text>
+  <text x="300" y="400" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="22" fill="#2E1810" opacity="0.5">Your photo here</text>
 </svg>
