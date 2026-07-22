@@ -26,54 +26,77 @@
    as aliases so existing selectors keep working without refactor.
    ============================================================ */
 :root {
-  /* Semantic palette — Botanical redesign (2026-07-22)
-     Forest/olive greens + warm white/cream/sand + terracotta/camel brown
-     + a soft rose accent + a sparing mustard highlight.
-     Weighted from a botanical reference board: green ~39%, white/neutral
-     ~47%, brown/terracotta ~8%, pink/rose ~5%, mustard highlight ~1%. */
-  --color-primary:        #3D6B4F;  /* Forest green — CTAs, primary actions */
-  --color-primary-hover:  #2C5039;  /* Darker forest green — CTA hover */
-  --color-accent:         #6E7F3D;  /* Olive green — links, accents, ✓ */
-  --color-accent-hover:   #56612F;  /* Darker olive — link hover */
-  --color-bg:             #FBF8F1;  /* Warm white — page background */
-  --color-bg-alt:         #EFE6D3;  /* Sand / beige — section alternation */
-  --color-text:           #2E1810;  /* Dark brown — body text */
-  --color-text-muted:     #6B5A48;  /* Warm taupe — sub text */
-  --color-rule:           #DCD4B8;  /* Sage-beige — borders / dividers */
-  --color-highlight:      #C9A227;  /* Mustard — decorative pop, sparing use */
-  --color-success:        #5F7A3D;  /* Moss green */
-  --color-error:          #B4472E;  /* Warm terracotta-red */
+  /* Semantic palette — Earthy Botanical redesign v3 (2026-07-22)
+     Full custom 27-color palette supplied by the client, matched directly
+     to the reference wall mural's own paint colors. Deep forest/olive/moss
+     greens dominate CTAs and accents; warm white/ivory/sand/camel carry
+     the page; chocolate brown/terracotta for text and secondary accents;
+     mustard used sparingly; pink/mauve reserved for decorative blossom
+     accents (About page, badges). No true red exists in this palette, so
+     --color-error borrows Deep Mauve as the closest alarm-adjacent tone. */
+  --color-primary:        #2F4A35;  /* Forest Green — CTAs, primary actions */
+  --color-primary-hover:  #1F3627;  /* Bottle Green — CTA hover */
+  --color-accent:         #6F844F;  /* Fern Green — links, accents, ✓ */
+  --color-accent-hover:   #4E6A3D;  /* Leaf Green — link hover */
+  --color-bg:             #F2EFE8;  /* Warm White — page background */
+  --color-bg-alt:         #EDE6D8;  /* Ivory — section alternation */
+  --color-text:           #5B3B2A;  /* Chocolate Brown — body text */
+  --color-text-muted:     #8F5E44;  /* Burnt Clay — sub text */
+  --color-rule:           #CDB99A;  /* Desert Beige — borders / dividers */
+  --color-highlight:      #D8BF2C;  /* Mustard Yellow — decorative pop, sparing use */
+  --color-success:        #8FA76A;  /* Sage Green */
+  --color-error:          #8E5572;  /* Deep Mauve — no red in this palette */
   --color-wa-green:       #25D366;
-  --color-white:          #FFFFFF;
-  --color-terracotta:      #C1694F;  /* Secondary accent — tags, ribbons */
-  --color-terracotta-hover: #A65640;
-  --color-blush:           #D9A0A6;  /* Dusty rose — sparing decorative accent */
-  --color-blush-light:     #F3DEE1;  /* Soft pink tint — subtle callout bg */
+  --color-white:          #F8F8F5;  /* Pure White */
+  --color-terracotta:      #A96B47;  /* Terracotta — secondary accent, tags, ribbons */
+  --color-terracotta-hover: #8F5E44;  /* Burnt Clay */
+  --color-blush:           #D8AFC6;  /* Blush Pink — sparing decorative accent */
+  --color-blush-light:     #E5C6D8;  /* Soft Pink tint — subtle callout bg */
 
-  /* Mural illustration palette — for the painted botanical scenes on the
-     homepage/product/about heroes only (echoes the reference wall mural).
-     Not general UI tokens — don't reach for these outside those scenes. */
-  --mural-sun:          #C1694F;
-  --mural-sand-light:   #EDE1C6;
-  --mural-sand-deep:    #D9B98F;
-  --mural-forest:       #2C5039;
-  --mural-olive:        #6E7F3D;
-  --mural-moss:         #5F7A3D;
-  --mural-sage:         #8FA35E;
-  --mural-bottle:       #1E3A2A;
-  --mural-blossom-1:    #E7B6C6;
-  --mural-blossom-2:    #C9668F;
-  --mural-blossom-3:    #7A3355;
-  --mural-blossom-4:    #C9A8D6;
-  --mural-flower-white: #FFFFFF;
-  --mural-highlight:    #C7D66B;  /* yellow-green leaf-vein highlight */
+  /* Extra named colors from the client's palette — for badges, tags, and
+     one-off decorative touches beyond the semantic slots above. */
+  --color-camel:        #B8875C;
+  --color-sand-beige:   #D9C8AE;
+  --color-desert-beige: #CDB99A;
+  --color-chocolate:    #5B3B2A;
+  --color-olive:        #7B8D42;
+  --color-moss:         #5E7145;
+  --color-fern:         #6F844F;
+  --color-leaf:         #4E6A3D;
+  --color-forest:       #2F4A35;
+  --color-bottle:       #1F3627;
+  --color-jungle:       #18261A;
+  --color-pistachio:    #B3C96B;
+  --color-lime:         #C8D95A;
+  --color-golden:       #E5C81A;
+  --color-dusty-rose:   #C88FAF;
+  --color-rose-pink:    #B86C91;
+  --color-deep-mauve:   #8E5572;
+  --color-black:        #1A1A1A;
+
+  /* Mural illustration palette — pulled 1:1 from the client's colors,
+     for the painted botanical scenes on the homepage/product/about heroes. */
+  --mural-sun:          #A96B47;  /* Terracotta */
+  --mural-sand-light:   #EDE6D8;  /* Ivory */
+  --mural-sand-deep:    #CDB99A;  /* Desert Beige */
+  --mural-forest:       #2F4A35;
+  --mural-olive:        #7B8D42;
+  --mural-moss:         #5E7145;
+  --mural-sage:         #8FA76A;
+  --mural-bottle:       #1F3627;
+  --mural-blossom-1:    #E5C6D8;  /* Soft Pink */
+  --mural-blossom-2:    #D8AFC6;  /* Blush Pink */
+  --mural-blossom-3:    #8E5572;  /* Deep Mauve */
+  --mural-blossom-4:    #B86C91;  /* Rose Pink */
+  --mural-flower-white: #F8F8F5;
+  --mural-highlight:    #C8D95A;  /* Lime Green leaf-vein highlight */
 
   /* Legacy aliases — old selectors reference these names. Map to new. */
   --color-saffron:        var(--color-primary);
   --color-saffron-dark:   var(--color-primary-hover);
   --color-maroon:         var(--color-text);
   --color-gold:           var(--color-highlight);
-  --color-gold-light:     #EFE3B0;  /* mustard-cream — footer accent */
+  --color-gold-light:     #E9D98C;  /* light mustard — footer accent */
   --color-cream:          var(--color-bg);
   --color-cream-darker:   var(--color-bg-alt);
   --color-brown:          var(--color-text);
@@ -124,8 +147,8 @@
   --border-thin:      1px solid var(--color-rule);
 
   /* Shadows */
-  --shadow-subtle:   0 2px 8px rgba(58, 36, 24, 0.07), 0 1px 2px rgba(58, 36, 24, 0.05);
-  --shadow-elevated: 0 16px 40px -12px rgba(58, 36, 24, 0.22), 0 4px 12px rgba(58, 36, 24, 0.08);
+  --shadow-subtle:   0 2px 8px rgba(91, 59, 42, 0.07), 0 1px 2px rgba(91, 59, 42, 0.05);
+  --shadow-elevated: 0 16px 40px -12px rgba(91, 59, 42, 0.22), 0 4px 12px rgba(91, 59, 42, 0.08);
 
   /* Transitions */
   --transition-fast: 150ms ease;
@@ -743,7 +766,7 @@ p:last-child {
    7. Site footer
    ============================================================ */
 .site-footer {
-  background-color: var(--color-text);
+  background-color: var(--color-jungle);
   color: var(--color-bg);
   padding: var(--sp-3xl) 0 0;
   margin-top: var(--sp-4xl);
@@ -1038,6 +1061,17 @@ p:last-child {
 .hero__content {
   position: relative;
   z-index: 2;
+  background: rgba(242, 239, 232, 0.86);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-radius: 20px;
+  padding: var(--sp-xl);
+}
+
+@media (min-width: 768px) {
+  .hero__content {
+    padding: var(--sp-2xl);
+  }
 }
 
 .hero__title {
@@ -1096,7 +1130,7 @@ p:last-child {
   position: absolute;
   inset: 0;
   z-index: 0;
-  opacity: 0.44;
+  opacity: 0.95;
   pointer-events: none;
   overflow: hidden;
 }
@@ -1546,7 +1580,7 @@ p:last-child {
   position: absolute;
   inset: 0;
   z-index: 0;
-  opacity: 0.32;
+  opacity: 0.42;
   pointer-events: none;
   overflow: hidden;
 }
@@ -3590,7 +3624,7 @@ main p a:not(.btn):not(.btn--text):not(.product-card__cta):hover {
     border-top: 1px solid var(--color-rule);
     padding: var(--sp-md) var(--container-padding);
     margin: var(--sp-xl) calc(-1 * var(--container-padding)) calc(-1 * var(--sp-2xl));
-    box-shadow: 0 -4px 16px rgba(58, 36, 24, 0.08);
+    box-shadow: 0 -4px 16px rgba(91, 59, 42, 0.08);
     z-index: var(--z-sticky-header);
     font-size: var(--fs-sm);
   }
