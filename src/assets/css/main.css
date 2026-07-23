@@ -17,6 +17,19 @@
 }
 
 /* ============================================================
+   0b. Self-hosted font — Fraunces Variable (latin subset, ~66KB)
+   Served from /assets/fonts/Fraunces-Variable.woff2
+   Warm, characterful display serif for headings.
+   ============================================================ */
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('/assets/fonts/Fraunces-Variable.woff2') format('woff2-variations');
+}
+
+/* ============================================================
    1. Custom properties (design tokens)
    --------------------------------------------------------------
    2026-05-09 — Modern Maroon redesign.
@@ -26,69 +39,71 @@
    as aliases so existing selectors keep working without refactor.
    ============================================================ */
 :root {
-  /* Semantic palette — Earthy Botanical redesign v3 (2026-07-22)
-     Full custom 27-color palette supplied by the client, matched directly
-     to the reference wall mural's own paint colors. Deep forest/olive/moss
-     greens dominate CTAs and accents; warm white/ivory/sand/camel carry
-     the page; chocolate brown/terracotta for text and secondary accents;
-     mustard used sparingly; pink/mauve reserved for decorative blossom
-     accents (About page, badges). No true red exists in this palette, so
-     --color-error borrows Deep Mauve as the closest alarm-adjacent tone. */
-  --color-primary:        #2F4A35;  /* Forest Green — CTAs, primary actions */
-  --color-primary-hover:  #1F3627;  /* Bottle Green — CTA hover */
-  --color-accent:         #6F844F;  /* Fern Green — links, accents, ✓ */
-  --color-accent-hover:   #4E6A3D;  /* Leaf Green — link hover */
-  --color-bg:             #F2EFE8;  /* Warm White — page background */
-  --color-bg-alt:         #EDE6D8;  /* Ivory — section alternation */
-  --color-text:           #5B3B2A;  /* Chocolate Brown — body text */
-  --color-text-muted:     #8F5E44;  /* Burnt Clay — sub text */
-  --color-rule:           #CDB99A;  /* Desert Beige — borders / dividers */
-  --color-highlight:      #D8BF2C;  /* Mustard Yellow — decorative pop, sparing use */
+  /* Semantic palette — Torn-Paper Heritage redesign v4 (2026-07-23)
+     Client-supplied 6-color brief: green / terracotta / cream / mustard /
+     base / ink. Warm editorial, artisanal Indian-heritage look. Green
+     anchors CTAs-adjacent brand moments and dark section backgrounds;
+     terracotta is the primary CTA color; mustard is reserved for headings
+     set on dark-green backgrounds; cream and base alternate as the two
+     light section backgrounds. All derived greens/tans/mustards below are
+     tuned to sit within this same family so the wider 27-color palette
+     (badges, mural illustration) stays visually coherent with the brief. */
+  --color-primary:        #3D6B4F;  /* Green — CTAs-adjacent, dark section bg */
+  --color-primary-hover:  #2E5240;  /* Darker Green — hover */
+  --color-accent:         #5C8A64;  /* Mid Green — links, accents, ✓ */
+  --color-accent-hover:   #476B4C;  /* Darker Green — link hover */
+  --color-bg:             #FBF6EC;  /* Base — default page background */
+  --color-bg-alt:         #F3E4C8;  /* Cream — section alternation */
+  --color-text:           #2C231C;  /* Ink — body text */
+  --color-text-muted:     #6B5644;  /* Warm Brown — sub text */
+  --color-rule:           #E0CFA8;  /* Warm Beige — borders / dividers */
+  --color-highlight:      #E9A72C;  /* Mustard — decorative pop, sparing use */
+  --color-heading-on-dark: #E9A72C;  /* Mustard — headings set on green sections */
   --color-success:        #8FA76A;  /* Sage Green */
   --color-error:          #8E5572;  /* Deep Mauve — no red in this palette */
   --color-wa-green:       #25D366;
-  --color-white:          #F8F8F5;  /* Pure White */
-  --color-terracotta:      #A96B47;  /* Terracotta — secondary accent, tags, ribbons */
-  --color-terracotta-hover: #8F5E44;  /* Burnt Clay */
+  --color-white:          #FFFDF8;  /* Warm White — card surfaces */
+  --color-terracotta:      #D96A3A;  /* Terracotta — primary CTA */
+  --color-terracotta-hover: #B85A2E;  /* Darker Terracotta — CTA hover */
   --color-blush:           #D8AFC6;  /* Blush Pink — sparing decorative accent */
   --color-blush-light:     #E5C6D8;  /* Soft Pink tint — subtle callout bg */
 
   /* Extra named colors from the client's palette — for badges, tags, and
      one-off decorative touches beyond the semantic slots above. */
-  --color-camel:        #B8875C;
-  --color-sand-beige:   #D9C8AE;
-  --color-desert-beige: #CDB99A;
-  --color-chocolate:    #5B3B2A;
-  --color-olive:        #7B8D42;
-  --color-moss:         #5E7145;
-  --color-fern:         #6F844F;
-  --color-leaf:         #4E6A3D;
-  --color-forest:       #2F4A35;
-  --color-bottle:       #1F3627;
-  --color-jungle:       #18261A;
+  --color-camel:        #C08A52;
+  --color-sand-beige:   #E0CFA8;
+  --color-desert-beige: #E0CFA8;
+  --color-chocolate:    #2C231C;
+  --color-olive:        #6E8049;
+  --color-moss:         #55704A;
+  --color-fern:         #5C8A64;
+  --color-leaf:         #476B4C;
+  --color-forest:       #3D6B4F;
+  --color-bottle:       #2E5240;
+  --color-jungle:       #1B2E20;
   --color-pistachio:    #B3C96B;
   --color-lime:         #C8D95A;
-  --color-golden:       #E5C81A;
+  --color-golden:       #E9A72C;
   --color-dusty-rose:   #C88FAF;
   --color-rose-pink:    #B86C91;
   --color-deep-mauve:   #8E5572;
   --color-black:        #1A1A1A;
 
-  /* Mural illustration palette — pulled 1:1 from the client's colors,
+  /* Mural illustration palette — retuned to the new brief colors,
      for the painted botanical scenes on the homepage/product/about heroes. */
-  --mural-sun:          #A96B47;  /* Terracotta */
-  --mural-sand-light:   #EDE6D8;  /* Ivory */
-  --mural-sand-deep:    #CDB99A;  /* Desert Beige */
-  --mural-forest:       #2F4A35;
-  --mural-olive:        #7B8D42;
-  --mural-moss:         #5E7145;
+  --mural-sun:          #D96A3A;  /* Terracotta */
+  --mural-sand-light:   #F3E4C8;  /* Cream */
+  --mural-sand-deep:    #E0CFA8;  /* Warm Beige */
+  --mural-forest:       #3D6B4F;
+  --mural-olive:        #6E8049;
+  --mural-moss:         #55704A;
   --mural-sage:         #8FA76A;
-  --mural-bottle:       #1F3627;
+  --mural-bottle:       #2E5240;
   --mural-blossom-1:    #E5C6D8;  /* Soft Pink */
   --mural-blossom-2:    #D8AFC6;  /* Blush Pink */
   --mural-blossom-3:    #8E5572;  /* Deep Mauve */
   --mural-blossom-4:    #B86C91;  /* Rose Pink */
-  --mural-flower-white: #F8F8F5;
+  --mural-flower-white: #FFFDF8;
   --mural-highlight:    #C8D95A;  /* Lime Green leaf-vein highlight */
 
   /* Legacy aliases — old selectors reference these names. Map to new. */
@@ -96,7 +111,7 @@
   --color-saffron-dark:   var(--color-primary-hover);
   --color-maroon:         var(--color-text);
   --color-gold:           var(--color-highlight);
-  --color-gold-light:     #E9D98C;  /* light mustard — footer accent */
+  --color-gold-light:     #F0C878;  /* light mustard — footer accent */
   --color-cream:          var(--color-bg);
   --color-cream-darker:   var(--color-bg-alt);
   --color-brown:          var(--color-text);
@@ -109,7 +124,7 @@
      Cormorant/Playfair are unlikely to be locally installed, so this
      resolves to Georgia for most visitors — a real, elegant serif
      with no extra network request, echoing the wordmark's serif. */
-  --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-display: 'Fraunces', 'Playfair Display', Georgia, 'Times New Roman', serif;
   --font-body:    'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Type scale — flatter, modern, functional. Hero stays bold but human. */
@@ -147,8 +162,8 @@
   --border-thin:      1px solid var(--color-rule);
 
   /* Shadows */
-  --shadow-subtle:   0 2px 8px rgba(91, 59, 42, 0.07), 0 1px 2px rgba(91, 59, 42, 0.05);
-  --shadow-elevated: 0 16px 40px -12px rgba(91, 59, 42, 0.22), 0 4px 12px rgba(91, 59, 42, 0.08);
+  --shadow-subtle:   0 2px 8px rgba(44, 35, 28, 0.08), 0 1px 2px rgba(44, 35, 28, 0.05);
+  --shadow-elevated: 0 16px 40px -12px rgba(44, 35, 28, 0.24), 0 4px 12px rgba(44, 35, 28, 0.1);
 
   /* Transitions */
   --transition-fast: 150ms ease;
@@ -279,23 +294,80 @@ p:last-child {
   .section { padding: var(--sp-5xl) 0; }
 }
 
-/* Was a solid saffron band — softened to a cream-deep "editorial pause"
-   so the saffron stays reserved for actual CTAs inside the section. */
+/* Terracotta CTA band — used for the final-cta / newsletter sections that
+   sit just above the footer on every page. */
 .section--saffron {
-  background-color: var(--color-cream-darker);
-  color: var(--color-brown);
-  border-top: 1px solid var(--color-rule);
-  border-bottom: 1px solid var(--color-rule);
+  background-color: var(--color-terracotta);
+  color: var(--color-white);
 }
 
 .section--saffron h1,
 .section--saffron h2,
 .section--saffron h3 {
-  color: var(--color-ink);
+  color: var(--color-white);
+}
+
+.section--saffron .newsletter__sub,
+.section--saffron .newsletter__terms,
+.section--saffron .final-cta__amazon {
+  color: rgba(255, 253, 248, 0.85);
+}
+
+.section--saffron .newsletter__terms a,
+.section--saffron .final-cta__amazon a {
+  color: var(--color-white);
+}
+
+.section--saffron .newsletter__terms a:hover,
+.section--saffron .final-cta__amazon a:hover {
+  color: var(--color-heading-on-dark);
 }
 
 .section--cream-darker {
   background-color: var(--color-cream-darker);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Cg fill='none' stroke='%233D6B4F' stroke-opacity='0.05' stroke-width='1.5'%3E%3Cpath d='M14 46c0-9 7-16 16-16s16 7 16 16-7 12-16 12-16-3-16-12z'/%3E%3Ccircle cx='54' cy='16' r='2.5'/%3E%3Ccircle cx='14' cy='14' r='1.5'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Dark-green intro/story band — founders' quote, "why we started" content. */
+.section--green {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.section--green h1,
+.section--green h2,
+.section--green h3 {
+  color: var(--color-heading-on-dark);
+}
+
+.section--green .eyebrow {
+  color: var(--color-heading-on-dark);
+}
+
+.section--green p,
+.section--green li {
+  color: var(--color-bg-alt);
+}
+
+.section--green .founder-quote {
+  border-left-color: var(--color-heading-on-dark);
+}
+
+.section--green .founder-quote p {
+  color: var(--color-bg);
+}
+
+.section--green .founder-quote__by {
+  color: var(--color-heading-on-dark);
+}
+
+.section--green .btn--text {
+  color: var(--color-heading-on-dark);
+}
+
+.section--green .btn--text:hover {
+  color: var(--color-bg);
 }
 
 /* Eyebrow — small forest-green label above key headings (modern, no rule line) */
@@ -319,8 +391,8 @@ p:last-child {
   font-family: var(--font-body);
   font-size: var(--fs-sm);
   font-weight: 600;
-  letter-spacing: 0;
-  text-transform: none;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   text-decoration: none;
   text-align: center;
   border: 1.5px solid transparent;
@@ -331,41 +403,43 @@ p:last-child {
 }
 
 .btn--primary {
-  background-color: var(--color-saffron);
-  color: var(--color-cream);
-  border-color: var(--color-saffron);
+  background-color: var(--color-terracotta);
+  color: var(--color-white);
+  border-color: var(--color-terracotta);
 }
 
 .btn--primary:hover {
-  background-color: var(--color-saffron-dark);
-  border-color: var(--color-saffron-dark);
-  color: var(--color-cream);
+  background-color: var(--color-terracotta-hover);
+  border-color: var(--color-terracotta-hover);
+  color: var(--color-white);
+  transform: translateY(-2px);
 }
 
 .btn--secondary {
   background-color: transparent;
-  color: var(--color-brown);
-  border-color: var(--color-brown);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 .btn--secondary:hover {
-  background-color: var(--color-brown);
-  color: var(--color-cream);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  transform: translateY(-2px);
 }
 
-/* Repurposed for the new cream-deep editorial sections.
-   Originally rendered on a saffron field (cream-on-saffron); now
-   needs to read on cream-darker, so it became maroon-outlined. */
+/* Outline button for use on dark-green sections — outlined + set in cream
+   so it reads clearly against the green background. */
 .btn--outline-cream {
   background-color: transparent;
-  color: var(--color-maroon);
-  border-color: var(--color-maroon);
+  color: var(--color-bg-alt);
+  border-color: var(--color-bg-alt);
 }
 
 .btn--outline-cream:hover {
-  background-color: var(--color-maroon);
-  color: var(--color-cream);
-  border-color: var(--color-maroon);
+  background-color: var(--color-bg-alt);
+  color: var(--color-primary);
+  border-color: var(--color-bg-alt);
+  transform: translateY(-2px);
 }
 
 /* Text-style "link as button" */
@@ -399,7 +473,9 @@ p:last-child {
   position: sticky;
   top: 0;
   z-index: var(--z-sticky-header);
-  background-color: var(--color-cream);
+  background-color: rgba(251, 246, 236, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-rule);
   transition: box-shadow var(--transition-base);
 }
@@ -427,6 +503,23 @@ p:last-child {
 .site-header__logo img {
   height: 40px;
   width: auto;
+}
+
+.site-header__tag {
+  display: none;
+  font-family: var(--font-body);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  margin-right: var(--sp-md);
+}
+
+@media (min-width: 1024px) {
+  .site-header__tag {
+    display: inline-block;
+  }
 }
 
 /* Nav (desktop) */
@@ -1074,6 +1167,37 @@ p:last-child {
   .torn-edge { height: 56px; }
 }
 
+/* Overhanging line-art illustrations — decorative accents that spill
+   past a section's edge. Hidden on small screens where there's no room
+   for them to overhang without clipping or overlapping content. */
+.decor-illustration {
+  display: none;
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.9;
+  z-index: 2;
+}
+
+@media (min-width: 900px) {
+  .decor-illustration {
+    display: block;
+  }
+}
+
+.decor-illustration--brass-bowl {
+  width: 130px;
+  height: auto;
+  bottom: -22px;
+  left: -18px;
+}
+
+.decor-illustration--jujube-tree {
+  width: 100px;
+  height: auto;
+  top: -28px;
+  right: -14px;
+}
+
 @media (min-width: 768px) {
   .hero {
     padding: var(--sp-4xl) 0 var(--sp-5xl);
@@ -1270,7 +1394,7 @@ p:last-child {
 .product-card {
   background-color: var(--color-bg);
   border: 1px solid var(--color-rule);
-  border-radius: 14px;
+  border-radius: 20px;
   overflow: hidden;
   position: relative;
   transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -1297,7 +1421,13 @@ p:last-child {
 
 .product-card__image {
   aspect-ratio: 1 / 1;
-  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-alt) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23D96A3A' stroke-opacity='0.35' stroke-width='2'%3E%3Ccircle cx='100' cy='100' r='94' stroke-dasharray='3 6'/%3E%3Ccircle cx='100' cy='100' r='80' stroke-dasharray='1 5'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, 90% 90%;
+  background-position: center, center;
   margin: calc(-1 * var(--sp-lg)) calc(-1 * var(--sp-lg)) var(--sp-lg);
   overflow: hidden;
   position: relative;
@@ -1448,7 +1578,7 @@ p:last-child {
 .promo-banner__feature-thumb {
   width: 96px;
   height: 96px;
-  border-radius: 14px;
+  border-radius: 20px;
   overflow: hidden;
   position: absolute;
   bottom: var(--sp-lg);
@@ -1799,8 +1929,14 @@ p:last-child {
 
 .product-hero__main-image {
   aspect-ratio: 1 / 1;
-  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-alt) 100%);
-  border-radius: 14px;
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-alt) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23D96A3A' stroke-opacity='0.3' stroke-width='2'%3E%3Ccircle cx='100' cy='100' r='94' stroke-dasharray='3 6'/%3E%3Ccircle cx='100' cy='100' r='82' stroke-dasharray='1 5'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, 92% 92%;
+  background-position: center, center;
+  border-radius: 20px;
   overflow: hidden;
   border: 1px solid var(--color-rule);
   display: flex;
@@ -2790,15 +2926,15 @@ p:last-child {
   }
 }
 
-/* Primary button hover — subtle lift + shadow tinted to the new forest-green primary */
+/* Primary button hover — subtle lift + shadow tinted to the terracotta CTA */
 .btn--primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 24px -8px rgba(45, 80, 57, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -8px rgba(184, 90, 46, 0.45);
 }
 
 .btn--secondary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px -6px rgba(46, 24, 16, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px -6px rgba(46, 82, 64, 0.3);
 }
 
 /* Text-link button — arrow nudges right on hover */
@@ -2809,7 +2945,7 @@ p:last-child {
 }
 
 .btn--text:hover {
-  text-decoration-color: var(--color-saffron);
+  text-decoration-color: var(--color-terracotta);
   letter-spacing: 0.08em;
 }
 
@@ -3325,16 +3461,36 @@ p:last-child {
 
 /* ---- Global polish — soften double-padding when adjacent sections share bg ---- */
 .section--cream-darker + .section--cream-darker,
-.section--cream-darker + .section--saffron,
-.section--saffron + .section--cream-darker {
+.section--green + .section--green {
   padding-top: var(--sp-xl);
 }
 
 @media (min-width: 768px) {
   .section--cream-darker + .section--cream-darker,
-  .section--cream-darker + .section--saffron,
-  .section--saffron + .section--cream-darker {
+  .section--green + .section--green {
     padding-top: var(--sp-3xl);
+  }
+}
+
+/* ---- Rounded seams — every colored section curves into whatever precedes
+   it, so background transitions read as soft organic edges rather than
+   hard rectangular color blocks. Harmless when the neighbor happens to
+   share the same color (the notch just reveals more of the same bg). ---- */
+.section--cream-darker,
+.section--green,
+.section--saffron {
+  position: relative;
+  z-index: 1;
+  border-radius: 20px 20px 0 0;
+  margin-top: -20px;
+}
+
+@media (min-width: 768px) {
+  .section--cream-darker,
+  .section--green,
+  .section--saffron {
+    border-radius: 36px 36px 0 0;
+    margin-top: -36px;
   }
 }
 
@@ -3355,10 +3511,13 @@ p:last-child {
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
-  width: 36px;
-  height: 2px;
-  background-color: var(--color-accent);
-  border-radius: 2px;
+  width: 48px;
+  height: 0;
+  border-bottom: 3px dotted var(--color-terracotta);
+}
+
+.section--green .section-heading.text-center h2::after {
+  border-bottom-color: var(--color-heading-on-dark);
 }
 
 /* Body text links — animated underline reveal */
